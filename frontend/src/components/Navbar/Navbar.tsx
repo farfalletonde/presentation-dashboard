@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from "../../public/svg/logo.svg";
 import { AuthContext } from "src/context/AuthContext";
 import useLogout from "src/api/useLogout";
 import { apiRequest } from "src/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -15,6 +16,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await logout.post();
+    await AsyncStorage.removeItem("auth");
     apiRequest.clearTokens();
     setUser(null);
   };

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
+import useSignup from "src/api/useSignup";
+import useFetchProfile from "src/api/useFetchProfile";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const signup = useSignup();
+  const fetchProfile = useFetchProfile();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const signupResult = await signup.post({ name, email, password });
+
+    if (signupResult) {
+      fetchProfile(signupResult.token);
+    }
   };
 
   return (

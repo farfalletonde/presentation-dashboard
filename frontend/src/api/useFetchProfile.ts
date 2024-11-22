@@ -2,8 +2,10 @@ import { useCallback } from "react";
 import { apiRequest } from ".";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type IFetchProfileResponse = {
+export interface IFetchProfileResponse {
   id: string;
+  name: string;
+  email: string;
 };
 
 const useFetchProfile = (): ((

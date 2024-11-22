@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcryptjs from "bcryptjs";
 import db from "../db.js";
-import jwt from "jsonwebtoken";
+import { generateToken } from "./tokenController.js";
 
 export const signupController = async (req: Request, res: Response) => {
   try {
@@ -93,17 +93,30 @@ export const logoutController = async (req: Request, res: Response) => {
   }
 };
 
-const generateToken = (userId: string, res: Response) => {
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
-    expiresIn: "15d",
-  });
+export const fetchUserController = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
 
-  res.cookie("jwt", token, {
-    maxAge: 15 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    sameSite: "strict",
-    secure: false,
-  });
+    const getUser = await db.query("SELECT * FROM users WHERE id = $1", [
+      req.user,
+    ]);
+    const user = getUser.rows[0];
 
-  return token;
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    res.status(200).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+  } catch (error: any) {
+    console.log("Error in getMe controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };

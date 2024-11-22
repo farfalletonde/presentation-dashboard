@@ -1,0 +1,31 @@
+.navbar {
+  background-color: #fff;
+  height: 60px;
+  width: 100%;
+  padding: 16px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar_logo {
+  width: 142px;
+  height: 22px;
+}
+
+.navbar_avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff9900;
+}
+
+.navbar_avatar_name {
+  color: #fff;
+  font-size: 14px;
+  width: auto;
+}

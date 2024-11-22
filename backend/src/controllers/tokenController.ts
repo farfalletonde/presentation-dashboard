@@ -10,7 +10,7 @@ interface DecodedToken extends JwtPayload {
 declare global {
   namespace Express {
     export interface Request {
-      user: {
+      user?: {
         id: string;
       };
     }

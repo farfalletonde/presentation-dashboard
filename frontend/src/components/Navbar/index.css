@@ -22,10 +22,28 @@
   align-items: center;
   justify-content: center;
   background-color: #ff9900;
+  cursor: pointer;
 }
 
 .navbar_avatar_name {
   color: #fff;
   font-size: 14px;
   width: auto;
+}
+
+.logout_menu {
+  display: flex;
+  position: absolute;
+  width: auto;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 8px;
+  top: 52px;
+  right: 15px; /* Align to the right side of the parent container */
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
 }

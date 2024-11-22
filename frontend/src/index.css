@@ -7,4 +7,48 @@
 
 * {
   font-family: "Sailec", sans-serif;
+  color: #242424;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eff2f8;
+  display: flex;
+  height: 8%;
+}
+
+input {
+  padding: 10px;
+  font-size: 12px;
+  border: 2px solid #bdbfc5;
+  background-color: #fff;
+  border-radius: 6px;
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+  border-color: #8843fb;
+}
+
+label {
+  font-size: 12px;
+  margin-bottom: 8px;
+  display:inline-block;
+}
+
+button {
+  background-color: #4f61ff;
+  font-size: 12px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  border: none;
+}
+
+button:hover {
+  background-color: #4f81ff;
 }

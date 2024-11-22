@@ -1,0 +1,45 @@
+.login-container {
+  background-color: #fff;
+  padding: 24px 48px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+  color: #000;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-top: 12px;
+}
+
+.submit-button {
+  margin-top: 24px;
+}
+
+.form-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.navigate-link,
+.navigate-link:visited {
+  color: #4f61ff;
+  text-decoration: none;
+}
+
+.navigate-link:hover {
+  text-decoration: underline;
+}

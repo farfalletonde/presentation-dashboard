@@ -11,24 +11,24 @@ import useFetchProfile, {
   IFetchProfileResponse,
 } from "src/api/useFetchProfile";
 
-const AuthContext = createContext<{
-  authUser: IFetchProfileResponse | null;
-  setAuthUser: Dispatch<SetStateAction<IFetchProfileResponse | null>>;
+export const AuthContext = createContext<{
+  user: IFetchProfileResponse | null;
+  setUser: Dispatch<SetStateAction<IFetchProfileResponse | null>>;
   isLoading: boolean;
 }>({
-  authUser: null,
-  setAuthUser: () => {},
+  user: null,
+  setUser: () => {},
   isLoading: true,
 });
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [authUser, setAuthUser] = useState<IFetchProfileResponse | null>(null);
+  const [user, setUser] = useState<IFetchProfileResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchProfile = useFetchProfile();
 
   useEffect(() => {
-    const fetchAuthUser = async () => {
+    const fetchUser = async () => {
       try {
         const token = await AsyncStorage.getItem("auth");
 
@@ -40,7 +40,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         if (!profile) {
           return;
         }
-        setAuthUser(profile);
+        setUser(profile);
       } catch {
         console.error("Error");
       } finally {
@@ -48,15 +48,15 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    fetchAuthUser();
+    fetchUser();
   }, [fetchProfile]);
 
   return (
     <AuthContext.Provider
       value={{
-        authUser,
+        user,
         isLoading,
-        setAuthUser,
+        setUser,
       }}
     >
       {children}

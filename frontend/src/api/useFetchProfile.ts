@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "src/context/AuthContext";
 
 export interface IFetchProfileResponse {
-  id: string;
+  id: number;
   name: string;
   email: string;
 }

@@ -27,6 +27,8 @@ export const apiRequest = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T, J>(url: string, body: J) =>
     axios.post<T>(url, body).then(responseBody),
+  put: <T, J>(url: string, body: J) =>
+    axios.put<T>(url, body).then(responseBody),
   setTokens: (token: string) => {
     axios.interceptors.request.use((config) => {
       config.headers["Authorization"] = token;

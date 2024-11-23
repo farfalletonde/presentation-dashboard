@@ -116,7 +116,7 @@ export const fetchUserController = async (req: Request, res: Response) => {
       email: user.email,
     });
   } catch (error: any) {
-    console.log("Error in getMe controller", error.message);
+    console.log("Error in fetchUser controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

@@ -1,0 +1,67 @@
+.dashboardContainer {
+  margin: 8px 64px;
+}
+
+.dashboardTitle {
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.dashboardLabel {
+  color: #9aa0ab;
+  font-size: 10px;
+}
+
+.createContainer {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.createButton {
+  width: 282px;
+  height: 160px;
+  border-radius: 4px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  cursor: pointer;
+  box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.createWithAi {
+  flex-direction: row;
+  background: linear-gradient(49.85deg, #4f61ff 0%, #f450f9 100%);
+}
+
+.plusSvg {
+  width: auto;
+  padding: 12px;
+  box-sizing: content-box;
+  background-color: #4f61ff;
+  border-radius: 10px;
+}
+
+.starsSvg {
+  width: auto;
+}
+
+.newPresentation {
+  width: auto;
+  color: #4f61ff;
+  font-weight: 700;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.createWithAitTitle {
+  width: auto;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 16px;
+}

@@ -9,9 +9,7 @@ export interface IPresentation {
   last_updated: string;
 }
 
-const useGetPresentations = (): ((
-  token: string
-) => Promise<IPresentation[] | undefined>) =>
+const useGetPresentations = (): (() => Promise<IPresentation[] | undefined>) =>
   useCallback(async () => {
     try {
       const result = await apiRequest.get<IPresentation[]>("/presentation");

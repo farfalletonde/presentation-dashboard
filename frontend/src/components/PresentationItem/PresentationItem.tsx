@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
+import { ReactComponent as Delete } from "../../public/svg/delete.svg";
+import { ReactComponent as Rename } from "../../public/svg/rename.svg";
 import { ReactComponent as ThreeDots } from "../../public/svg/threedots.svg";
 import { IPresentation } from "src/api/useGetPresentations";
 
@@ -14,7 +16,10 @@ const PresentationItem = ({ presentation }: IPresentationItemProps) => {
     <div className="presentationContainer">
       <div className="presentationTitleContainer">
         <p className="presentationTitle">{presentation.name}</p>
-        <ThreeDots className="threeDots" />
+        <ThreeDots
+          className="threeDots"
+          onClick={() => setShowEditOverlay(true)}
+        />
       </div>
       <p className="lastUpdated">
         Last update {timeAgo(presentation.last_updated)}
@@ -29,6 +34,26 @@ const PresentationItem = ({ presentation }: IPresentationItemProps) => {
       />
 
       <p className="presentationAuthor">by {presentation.created_by}</p>
+
+      {showEditOverlay && (
+        <div
+          className="editOverlay"
+          onClick={() => {
+            setShowEditOverlay(false);
+          }}
+        >
+          <ul className="editMenu">
+            <li className="editListItem">
+              <Rename className="editIcon" />
+              <span className="editText">Rename</span>
+            </li>
+            <li className="editListItem">
+              <Delete className="editIcon" />
+              <span className="editText">Delete</span>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

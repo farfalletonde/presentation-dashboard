@@ -6,7 +6,7 @@ interface IDeletePresentationRequest {
   id: number;
 }
 
-const useCreatePresentation = () =>
+const useDeletePresentation = () =>
   useCallback(async (request: IDeletePresentationRequest) => {
     try {
       const result = await apiRequest.post<
@@ -21,4 +21,4 @@ const useCreatePresentation = () =>
     }
   }, []);
 
-export default useCreatePresentation;
+export default useDeletePresentation;

@@ -4,13 +4,26 @@ import { ReactComponent as Delete } from "../../public/svg/delete.svg";
 import { ReactComponent as Rename } from "../../public/svg/rename.svg";
 import { ReactComponent as ThreeDots } from "../../public/svg/threedots.svg";
 import { IPresentation } from "src/api/useGetPresentations";
+import useDeletePresentation from "src/api/useDeletePresentation";
 
 interface IPresentationItemProps {
   presentation: IPresentation;
+  presentationUpdated: () => void;
 }
 
-const PresentationItem = ({ presentation }: IPresentationItemProps) => {
+const PresentationItem = ({
+  presentation,
+  presentationUpdated,
+}: IPresentationItemProps) => {
   const [showEditOverlay, setShowEditOverlay] = useState(false);
+
+  const deletePresentation = useDeletePresentation();
+
+  const handleDeletePresentation = async () => {
+    await deletePresentation({ id: presentation.id });
+    presentationUpdated();
+    setShowEditOverlay(false);
+  };
 
   return (
     <div className="presentationContainer">
@@ -47,7 +60,7 @@ const PresentationItem = ({ presentation }: IPresentationItemProps) => {
               <Rename className="editIcon" />
               <span className="editText">Rename</span>
             </li>
-            <li className="editListItem">
+            <li className="editListItem" onClick={handleDeletePresentation}>
               <Delete className="editIcon" />
               <span className="editText">Delete</span>
             </li>

@@ -57,7 +57,10 @@ const Dashboard = () => {
 
             <div className="createContainer">
               {presentations?.map((item) => (
-                <PresentationItem presentation={item} />
+                <PresentationItem
+                  presentation={item}
+                  presentationUpdated={loadPresentations}
+                />
               ))}
             </div>
           </div>

@@ -3,6 +3,7 @@ import ModalBox from "../ModalBox/ModalBox";
 import { ReactComponent as Cross } from "../../public/svg/cross.svg";
 import "./index.css";
 import useCreatePresentation from "src/api/useCreatePresentation";
+import useGetAiResult from "src/api/useGetAiPrompt";
 
 interface ICreateModalProps {
   close: (isCreated?: boolean) => void;
@@ -11,9 +12,12 @@ interface ICreateModalProps {
 const CreateWithAI = ({ close }: ICreateModalProps) => {
   const [aiPrompt, setAiPrompt] = useState<string>("");
   const createPresentation = useCreatePresentation();
+  const getAiResult = useGetAiResult();
 
   const handleCreateWithAi = async () => {
-    await createPresentation({ name: aiPrompt });
+    const presentationName = await getAiResult({ message: aiPrompt });
+
+    await createPresentation({ name: presentationName! });
     close(true);
   };
 

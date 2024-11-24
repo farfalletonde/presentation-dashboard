@@ -9,10 +9,19 @@ export interface IPresentation {
   last_updated: string;
 }
 
-const useGetPresentations = (): (() => Promise<IPresentation[] | undefined>) =>
-  useCallback(async () => {
+export enum SORT_BY {
+  TITLE_A_Z,
+  TITLE_Z_A,
+  RECENTLY_MODIFIED,
+  OLDEST_MODIFIED,
+}
+
+const useGetPresentations = () =>
+  useCallback(async (sortBy: SORT_BY) => {
     try {
-      const result = await apiRequest.get<IPresentation[]>("/presentation");
+      const result = await apiRequest.get<IPresentation[]>("/presentation", {
+        sortBy: SORT_BY[sortBy],
+      });
 
       return result;
     } catch (error) {

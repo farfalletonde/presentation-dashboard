@@ -1,11 +1,58 @@
 .dashboardContainer {
-  margin: 8px 64px;
+  padding: 8px 64px;
 }
 
 .dashboardTitle {
   font-weight: 500;
   font-size: 14px;
   margin-top: 20px;
+}
+
+.dashboardTitleContainer {
+  display: flex;
+}
+
+.btnSortBy {
+  display: flex;
+  cursor: pointer;
+  width: auto;
+  align-items: center;
+  font-size: 12px;
+}
+
+.sortByIcon {
+  width: auto;
+}
+
+.sortByText {
+  text-decoration: underline;
+  margin-left: 6px;
+}
+
+.sortByMenu {
+  background-color: #fff;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 4px;
+  box-shadow: 10px 10px 16px 0px rgba(0, 0, 0, 0.1);
+  width: auto;
+  right: 64px;
+  margin-top: 175px;
+  position: absolute;
+}
+
+.sortByItem {
+  width: 147px;
+  padding: 8px 12px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sortByItem:hover {
+  background-color: #edefff;
+  color: #4f61ff;
 }
 
 .dashboardLabel {

@@ -6,8 +6,28 @@ export const getPresentationsController = async (
   res: Response
 ) => {
   try {
+    let sortQuery: string;
+
+    switch (req.query["sortBy"]) {
+      case "TITLE_A_Z":
+        sortQuery = "ORDER BY name ASC";
+        break;
+      case "TITLE_Z_A":
+        sortQuery = "ORDER BY name DESC";
+        break;
+      case "RECENTLY_MODIFIED":
+        sortQuery = "ORDER BY last_updated DESC";
+        break;
+      case "OLDEST_MODIFIED":
+        sortQuery = "ORDER BY last_updated ASC";
+        break;
+      default:
+        sortQuery = "ORDER BY last_updated DESC";
+    }
+
     const { rows } = await db.query(
-      "SELECT p.id, p.name, p.image, p.last_updated, u.name AS created_by FROM presentations p JOIN users u ON u.id = p.user_id WHERE p.user_id = $1",
+      "SELECT p.id, p.name, p.image, p.last_updated, u.name AS created_by FROM presentations p JOIN users u ON u.id = p.user_id WHERE p.user_id = $1 " +
+        sortQuery,
       [req.user]
     );
 

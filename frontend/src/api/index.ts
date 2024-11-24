@@ -24,7 +24,8 @@ const responseBody = <T>(response: AxiosResponse<T>): T | undefined =>
   response?.data;
 
 export const apiRequest = {
-  get: <T>(url: string) => axios.get<T>(url).then(responseBody),
+  get: <T>(url: string, params?: object) =>
+    axios.get<T>(url, { params }).then(responseBody),
   post: <T, J>(url: string, body: J) =>
     axios.post<T>(url, body).then(responseBody),
   put: <T, J>(url: string, body: J) =>

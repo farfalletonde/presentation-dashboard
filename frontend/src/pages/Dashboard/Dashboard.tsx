@@ -9,6 +9,7 @@ import useGetPresentations, {
 import { Modal } from "@mui/material";
 import CreatePresentation from "src/components/CreatePresentation/CreatePresentation";
 import CreateWithAI from "src/components/CreatePresentation/CreateWithAI";
+import PresentationItem from "src/components/PresentationItem/PresentationItem";
 
 const Dashboard = () => {
   const [presentations, setPresentations] = useState<IPresentation[]>();
@@ -56,10 +57,7 @@ const Dashboard = () => {
 
             <div className="createContainer">
               {presentations?.map((item) => (
-                <div className="createButton" key={item.id}>
-                  <Plus className="plusSvg" />
-                  <p className="newPresentation">Create a new presentation</p>
-                </div>
+                <PresentationItem presentation={item} />
               ))}
             </div>
           </div>

@@ -5,6 +5,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Sailec";
+  src: url("public/fonts/Sailec-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
 * {
   font-family: "Sailec", sans-serif;
   color: #242424;

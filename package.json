@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch backend/src --exec node --loader ts-node/esm ./backend/src/index.ts"
+    "dev": "nodemon --watch backend/src --exec node --loader ts-node/esm ./backend/src/index.ts",
+    "build": "tsc && npm install && npm install --prefix frontend && npm run build --prefix frontend", 
+    "start": "node backend/dist/src/index.js"
   },
   "type": "module",
   "keywords": [],
@@ -20,6 +22,7 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.7",
+    "path": "^0.12.7",
     "pg": "^8.13.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"

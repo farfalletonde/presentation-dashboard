@@ -5,9 +5,12 @@ import authRoutes from "./routes/authRoutes.js";
 import presentationRoutes from "./routes/presentationRoutes.js";
 import { generateUploadUrl } from "./s3.js";
 import { generateAIResult } from "./chatgpt.js";
+import path from "path";
 
 const app = express();
 dotenv.config();
+
+const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cors());
@@ -23,6 +26,11 @@ app.get("/api/s3", async (_req, res) => {
 app.post("/api/chatgpt", async (req, res) => {
   const aiPrompt = await generateAIResult(req.body.message);
   res.status(200).json({ message: aiPrompt });
+});
+
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
 
 app.listen(5001, () => {

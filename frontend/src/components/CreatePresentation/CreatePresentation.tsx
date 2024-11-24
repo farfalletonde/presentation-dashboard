@@ -11,11 +11,21 @@ interface ICreateModalProps {
 
 const CreatePresentation = ({ close }: ICreateModalProps) => {
   const [presentationName, setPresentationName] = useState<string>("");
+  const [file, setFile] = useState<File>();
+
+  const showImageBrowser = () => document.getElementById("imageInput")?.click();
+
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+    if (e.target.files && e.target.files?.[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
 
   const createPresentation = useCreatePresentation();
 
   const handlCreatePresentation = async () => {
-    await createPresentation({ name: presentationName });
+    await createPresentation({ name: presentationName }, file);
     close(true);
   };
 
@@ -32,13 +42,19 @@ const CreatePresentation = ({ close }: ICreateModalProps) => {
       />
 
       <label id="thumbnailTitle">Presentation Thumbnail</label>
-      <div className="imageUploadContainer">
+      <div className="imageUploadContainer" onClick={showImageBrowser}>
         <Thumbnail className="thumbnailSvg" />
         <p className="uploadImageDesc">
           Upload a picture for your presentation thumbnail. PNG or JPG (rec
           16:9)
         </p>
         <p className="browseImage">Browse</p>
+        <input
+          id="imageInput"
+          type="file"
+          accept="image/*"
+          onChange={handleFileSelected}
+        />
       </div>
 
       <button

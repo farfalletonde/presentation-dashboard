@@ -61,3 +61,7 @@
   align-self: flex-end;
   margin-top: 300px;
 }
+
+#imageInput {
+  display: none;
+}

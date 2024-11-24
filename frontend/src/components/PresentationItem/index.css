@@ -43,6 +43,7 @@
   border-radius: 2px;
   border: 1px solid #9aa0ab;
   margin-top: 12px;
+  object-fit: cover;
 }
 
 .presentationAuthor {

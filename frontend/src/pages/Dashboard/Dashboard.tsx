@@ -6,9 +6,14 @@ import Navbar from "src/components/Navbar/Navbar";
 import useGetPresentations, {
   IPresentation,
 } from "src/api/useGetPresentations";
+import { Modal } from "@mui/material";
+import CreatePresentation from "src/components/CreatePresentation/CreatePresentation";
+import CreateWithAI from "src/components/CreatePresentation/CreateWithAI";
 
 const Dashboard = () => {
   const [presentations, setPresentations] = useState<IPresentation[]>();
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showCreateAIModal, setShowCreateAIModal] = useState(false);
 
   const presentationsApi = useGetPresentations();
 
@@ -28,11 +33,17 @@ const Dashboard = () => {
         <h2 className="dashboardTitle">Create a presentation</h2>
 
         <div className="createContainer">
-          <div className="createButton">
+          <div
+            className="createButton"
+            onClick={() => setShowCreateModal(true)}
+          >
             <Plus className="plusSvg" />
             <p className="newPresentation">Create a new presentation</p>
           </div>
-          <div className="createButton createWithAi">
+          <div
+            className="createButton createWithAi"
+            onClick={() => setShowCreateAIModal(true)}
+          >
             <Stars className="starsSvg" />
             <p className="createWithAitTitle">Create with AI</p>
           </div>
@@ -54,6 +65,31 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+
+      <Modal open={showCreateModal} onClose={() => setShowCreateModal(false)}>
+        <CreatePresentation
+          close={(isCreated) => {
+            if (isCreated) {
+              loadPresentations();
+            }
+            setShowCreateModal(false);
+          }}
+        />
+      </Modal>
+
+      <Modal
+        open={showCreateAIModal}
+        onClose={() => setShowCreateAIModal(false)}
+      >
+        <CreateWithAI
+          close={(isCreated) => {
+            if (isCreated) {
+              loadPresentations();
+            }
+            setShowCreateAIModal(false);
+          }}
+        />
+      </Modal>
     </div>
   );
 };

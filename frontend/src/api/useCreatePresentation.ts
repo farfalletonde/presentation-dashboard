@@ -4,7 +4,7 @@ import { IPresentation } from "./useGetPresentations";
 
 interface ICreatePresentationRequest {
   name: string;
-  image: string;
+  image?: string;
 }
 
 const useCreatePresentation = () =>

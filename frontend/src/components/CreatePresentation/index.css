@@ -1,0 +1,63 @@
+.crossSvg {
+  position: absolute;
+  width: auto;
+  right: 16px;
+  top: 16px;
+}
+
+.modalTitle {
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+#aiPromptLabel {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+#thumbnailTitle {
+  margin-top: 16px;
+}
+
+.imageUploadContainer {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px dashed #bdbfc5;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.thumbnailSvg {
+  width: 43px;
+}
+
+.uploadImageDesc {
+  color: #9aa0ab;
+  font-size: 10px;
+  margin-left: 12px;
+}
+
+.browseImage {
+  color: #9aa0ab;
+  font-size: 8px;
+  border: 1px solid #9aa0ab;
+  border-radius: 40px;
+  width: auto;
+  padding: 6px 10px;
+  line-height: 13px;
+  margin-left: 30px;
+}
+
+#createButton {
+  width: auto;
+  align-self: flex-end;
+  margin-top: 24px;
+}
+
+#letsStartButton {
+  width: auto;
+  align-self: flex-end;
+  margin-top: 300px;
+}

@@ -5,6 +5,8 @@ import { ReactComponent as Rename } from "../../public/svg/rename.svg";
 import { ReactComponent as ThreeDots } from "../../public/svg/threedots.svg";
 import { IPresentation } from "src/api/useGetPresentations";
 import useDeletePresentation from "src/api/useDeletePresentation";
+import { Modal } from "@mui/material";
+import UpdatePresentation from "../CreatePresentation/UpdatePresentation";
 
 interface IPresentationItemProps {
   presentation: IPresentation;
@@ -16,6 +18,13 @@ const PresentationItem = ({
   presentationUpdated,
 }: IPresentationItemProps) => {
   const [showEditOverlay, setShowEditOverlay] = useState(false);
+
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const handleEditPresentation = async () => {
+    presentationUpdated();
+    setShowEditOverlay(false);
+  };
 
   const deletePresentation = useDeletePresentation();
 
@@ -56,7 +65,13 @@ const PresentationItem = ({
           }}
         >
           <ul className="editMenu">
-            <li className="editListItem">
+            <li
+              className="editListItem"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowEditModal(true);
+              }}
+            >
               <Rename className="editIcon" />
               <span className="editText">Rename</span>
             </li>
@@ -67,6 +82,18 @@ const PresentationItem = ({
           </ul>
         </div>
       )}
+
+      <Modal open={showEditModal} onClose={() => setShowEditModal(false)}>
+        <UpdatePresentation
+          id={presentation.id}
+          close={(isCreated) => {
+            if (isCreated) {
+              handleEditPresentation();
+            }
+            setShowEditModal(false);
+          }}
+        />
+      </Modal>
     </div>
   );
 };

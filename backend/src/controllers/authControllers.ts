@@ -18,6 +18,7 @@ export const signupController = async (req: Request, res: Response) => {
 
     if (rows.length > 0) {
       res.status(400).json({ error: "Email already exists" });
+      return;
     }
 
     const salt = await bcryptjs.genSalt(10);

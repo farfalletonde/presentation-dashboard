@@ -22,33 +22,38 @@ export const verifyToken = async (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers["authorization"]?.replace("Bearer ", "");
+  try {
+    const token = req.headers["authorization"]?.replace("Bearer ", "");
 
-  if (!token) {
-    res.status(401).json({ error: "Unauthorized - No token provided" });
-    return;
+    if (!token) {
+      res.status(401).json({ error: "Unauthorized - No token provided" });
+      return;
+    }
+
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
+    } catch (err) {
+      res.status(401).json({ error: "Unauthorized - Invalid Token" });
+      return;
+    }
+
+    const getUserResult = await db.query("SELECT id FROM users WHERE id = $1", [
+      decoded.userId,
+    ]);
+    const user = getUserResult.rows[0];
+
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    req.user = user.id;
+
+    next();
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
-
-  const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
-
-  if (!decoded) {
-    res.status(401).json({ error: "Unauthorized - Invalid Token" });
-    return;
-  }
-
-  const getUserResult = await db.query("SELECT id FROM users WHERE id = $1", [
-    decoded.userId,
-  ]);
-  const user = getUserResult.rows[0];
-
-  if (!user) {
-    res.status(404).json({ error: "User not found" });
-    return;
-  }
-
-  req.user = user.id;
-
-  next();
 };
 
 export const generateToken = (userId: string, res: Response) => {
@@ -63,5 +68,12 @@ export const generateToken = (userId: string, res: Response) => {
     secure: false,
   });
 
+  return token;
+};
+
+export const generateTestToken = (userId: string) => {
+  const payload = { userId };
+  // Use your secret key to sign the token
+  const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: "1h" });
   return token;
 };

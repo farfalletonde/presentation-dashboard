@@ -1,7 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { AxiosResponse } from "axios";
+import dotenv from "dotenv";
 
-axios.defaults.baseURL = "http://localhost:5001/api";
+dotenv.config();
+
+axios.defaults.baseURL = process.env.BASE_URL;
 
 async function getUserPayload(): Promise<string | null> {
   try {

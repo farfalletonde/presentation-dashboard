@@ -26,9 +26,9 @@ app.post("/api/chatgpt", async (req, res) => {
   res.status(200).json({ message: aiPrompt });
 });
 
-app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.use(express.static(path.join(path.resolve(), "/frontend/build")));
 app.get("*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+  res.sendFile(path.join(path.resolve(), "frontend", "build", "index.html"));
 });
 
 export const server = app.listen(5001, () => {

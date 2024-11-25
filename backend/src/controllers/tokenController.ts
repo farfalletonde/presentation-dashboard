@@ -77,6 +77,8 @@ export const generateToken = (userId: string, res: Response) => {
 export const generateTestToken = (userId: string) => {
   const payload = { userId };
   // Use your secret key to sign the token
-  const token = jwt.sign(payload, "testSecret", { expiresIn: "1h" });
+  const token = jwt.sign(payload, process.env.JWT_SECRET ?? "testSecret", {
+    expiresIn: "1h",
+  });
   return token;
 };

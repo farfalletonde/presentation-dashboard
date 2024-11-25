@@ -60,7 +60,7 @@ export const verifyToken = async (
 };
 
 export const generateToken = (userId: string, res: Response) => {
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+  const token = jwt.sign({ userId }, process.env.JWT_SECRET ?? "testSecret", {
     expiresIn: "15d",
   });
 

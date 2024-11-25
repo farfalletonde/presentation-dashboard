@@ -32,7 +32,10 @@ export const verifyToken = async (
 
     let decoded;
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
+      decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET ?? "testSecret"
+      ) as DecodedToken;
     } catch (err) {
       res.status(401).json({ error: "Unauthorized - Invalid Token" });
       return;
@@ -74,6 +77,6 @@ export const generateToken = (userId: string, res: Response) => {
 export const generateTestToken = (userId: string) => {
   const payload = { userId };
   // Use your secret key to sign the token
-  const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: "1h" });
+  const token = jwt.sign(payload, "testSecret", { expiresIn: "1h" });
   return token;
 };

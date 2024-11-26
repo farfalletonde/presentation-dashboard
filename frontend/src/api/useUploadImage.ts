@@ -1,26 +1,37 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
+import { AppContext } from "src/context/AppContext/AppContext";
 
 interface IUploadImageRequest {
   imageUrl: string;
   file: File;
 }
 
-const useUploadImage = () =>
-  useCallback(async ({ imageUrl, file }: IUploadImageRequest) => {
-    try {
-      await fetch(imageUrl, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: file,
-      });
+const useUploadImage = () => {
+  const { setIsLoading } = useContext(AppContext);
 
-      return imageUrl.split("?")[0];
-    } catch (error) {
-      console.error("uploadImage error", error);
-      return undefined;
-    }
-  }, []);
+  return useCallback(
+    async ({ imageUrl, file }: IUploadImageRequest) => {
+      try {
+        setIsLoading(true);
+
+        await fetch(imageUrl, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: file,
+        });
+
+        return imageUrl.split("?")[0];
+      } catch (error) {
+        console.error("uploadImage error", error);
+        return undefined;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setIsLoading]
+  );
+};
 
 export default useUploadImage;

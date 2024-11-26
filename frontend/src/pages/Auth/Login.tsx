@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const loginResult = await login.post({ email, password });
+    const loginResult = await login({ email, password });
 
     if (loginResult) {
       fetchProfile(loginResult.token);

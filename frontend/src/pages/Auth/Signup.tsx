@@ -15,7 +15,7 @@ const Signup = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const signupResult = await signup.post({ name, email, password });
+    const signupResult = await signup({ name, email, password });
 
     if (signupResult) {
       fetchProfile(signupResult.token);

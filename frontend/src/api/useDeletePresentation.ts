@@ -1,24 +1,35 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { apiRequest } from ".";
 import { IPresentation } from "./useGetPresentations";
+import { AppContext } from "src/context/AppContext/AppContext";
 
 interface IDeletePresentationRequest {
   id: number;
 }
 
-const useDeletePresentation = () =>
-  useCallback(async (request: IDeletePresentationRequest) => {
-    try {
-      const result = await apiRequest.post<
-        IPresentation,
-        IDeletePresentationRequest
-      >("/presentation/delete", request);
+const useDeletePresentation = () => {
+  const { setIsLoading } = useContext(AppContext);
 
-      return result;
-    } catch (error) {
-      console.error("deletePresentation error", error);
-      return undefined;
-    }
-  }, []);
+  return useCallback(
+    async (request: IDeletePresentationRequest) => {
+      try {
+        setIsLoading(true);
+
+        const result = await apiRequest.post<
+          IPresentation,
+          IDeletePresentationRequest
+        >("/presentation/delete", request);
+
+        return result;
+      } catch (error) {
+        console.error("deletePresentation error", error);
+        return undefined;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setIsLoading]
+  );
+};
 
 export default useDeletePresentation;

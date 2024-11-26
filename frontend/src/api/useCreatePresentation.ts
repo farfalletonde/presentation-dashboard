@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { apiRequest } from ".";
 import { IPresentation } from "./useGetPresentations";
 import useGetImageUploadUrl from "./useGetImageUploadUrl";
 import useUploadImage from "./useUploadImage";
+import { AppContext } from "src/context/AppContext/AppContext";
 
 interface ICreatePresentationRequest {
   name: string;
@@ -12,10 +13,13 @@ interface ICreatePresentationRequest {
 const useCreatePresentation = () => {
   const imageUploadUrlRequest = useGetImageUploadUrl();
   const imageUploadRequest = useUploadImage();
+  const { setIsLoading } = useContext(AppContext);
 
   return useCallback(
     async ({ name }: ICreatePresentationRequest, imageFile?: File) => {
       try {
+        setIsLoading(true);
+
         let imageUploadUrl: string | undefined;
 
         if (imageFile) {
@@ -41,9 +45,11 @@ const useCreatePresentation = () => {
       } catch (error) {
         console.error("createPresentation error", error);
         return undefined;
+      } finally {
+        setIsLoading(false);
       }
     },
-    [imageUploadRequest, imageUploadUrlRequest]
+    [imageUploadRequest, imageUploadUrlRequest, setIsLoading]
   );
 };
 

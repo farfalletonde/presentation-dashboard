@@ -1,7 +1,8 @@
 import { useCallback, useContext } from "react";
 import { apiRequest } from ".";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthContext } from "src/context/AuthContext";
+import { AuthContext } from "src/context/AuthContext/AuthContext";
+import { AppContext } from "src/context/AppContext/AppContext";
 
 export interface IFetchProfileResponse {
   id: number;
@@ -13,10 +14,13 @@ const useFetchProfile = (): ((
   token: string
 ) => Promise<IFetchProfileResponse | undefined>) => {
   const { setUser } = useContext(AuthContext);
+  const { setIsLoading } = useContext(AppContext);
 
   return useCallback(
     async (token: string) => {
       try {
+        setIsLoading(true);
+
         apiRequest.setTokens(token);
         AsyncStorage.setItem("auth", token);
 
@@ -33,9 +37,11 @@ const useFetchProfile = (): ((
         console.error("fetchProfile error", error);
 
         return undefined;
+      } finally {
+        setIsLoading(false);
       }
     },
-    [setUser]
+    [setUser, setIsLoading]
   );
 };
 

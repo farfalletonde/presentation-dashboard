@@ -1,5 +1,6 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { apiRequest } from ".";
+import { AppContext } from "src/context/AppContext/AppContext";
 
 export interface IPresentation {
   id: number;
@@ -16,18 +17,27 @@ export enum SORT_BY {
   OLDEST_MODIFIED,
 }
 
-const useGetPresentations = () =>
-  useCallback(async (sortBy: SORT_BY) => {
-    try {
-      const result = await apiRequest.get<IPresentation[]>("/presentation", {
-        sortBy: SORT_BY[sortBy],
-      });
+const useGetPresentations = () => {
+  const { setIsLoading } = useContext(AppContext);
 
-      return result;
-    } catch (error) {
-      console.error("getPresentations error", error);
-      return undefined;
-    }
-  }, []);
+  return useCallback(
+    async (sortBy: SORT_BY) => {
+      try {
+        setIsLoading(true);
+        const result = await apiRequest.get<IPresentation[]>("/presentation", {
+          sortBy: SORT_BY[sortBy],
+        });
+
+        return result;
+      } catch (error) {
+        console.error("getPresentations error", error);
+        return undefined;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setIsLoading]
+  );
+};
 
 export default useGetPresentations;

@@ -7,7 +7,6 @@ import { AuthContext } from "./AuthContext";
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IFetchProfileResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const fetchProfile = useFetchProfile();
 
@@ -27,8 +26,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         setUser(profile);
       } catch {
         console.error("Error");
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -39,7 +36,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
-        isLoading,
         setUser,
       }}
     >

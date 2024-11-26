@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
 import Signup from "./pages/Auth/Signup.tsx";
 import Dashboard from "./pages/Dashboard/Dashboard.tsx";
 import Login from "./pages/Auth/Login.tsx";

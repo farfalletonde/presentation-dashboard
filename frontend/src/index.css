@@ -11,6 +11,12 @@
   font-weight: 300;
 }
 
+:root {
+  --primary-purple: #4f61ff;
+  --text-color: #242424;
+  --text-color-2: #9aa0ab;
+}
+
 * {
   font-family: "Sailec", sans-serif;
   color: #242424;
@@ -43,11 +49,11 @@ input:focus {
 label {
   font-size: 12px;
   margin-bottom: 8px;
-  display:inline-block;
+  display: inline-block;
 }
 
 button {
-  background-color: #4f61ff;
+  background-color: var(--primary-purple);
   font-size: 12px;
   padding: 12px 24px;
   border-radius: 4px;

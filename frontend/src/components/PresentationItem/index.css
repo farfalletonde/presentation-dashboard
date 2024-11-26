@@ -31,7 +31,7 @@
 }
 
 .lastUpdated {
-  color: #9aa0ab;
+  color: var(--text-color-2);
   margin-top: 4px;
   font-size: 12px;
   font-weight: 300;
@@ -41,13 +41,13 @@
   width: 250px;
   height: 140px;
   border-radius: 2px;
-  border: 1px solid #9aa0ab;
+  border: 1px solid var(--text-color-2);
   margin-top: 12px;
   object-fit: cover;
 }
 
 .presentationAuthor {
-  color: #9aa0ab;
+  color: var(--text-color-2);
   margin-top: 18px;
   font-size: 12px;
   font-weight: 300;

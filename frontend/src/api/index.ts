@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { AxiosResponse } from "axios";
 
-axios.defaults.baseURL = '/api/';
+axios.defaults.baseURL = 'http://localhost:5001/api/';
 
 async function getUserPayload(): Promise<string | null> {
   try {

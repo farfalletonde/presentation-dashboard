@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import useLogin from "src/api/useLogin";
 import useFetchProfile from "src/api/useFetchProfile";
 
+export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,7 +46,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="submit-button">
+        <button
+          type="submit"
+          className="submit-button"
+          disabled={!password || !emailRegex.test(email)}
+        >
           Login
         </button>
       </form>

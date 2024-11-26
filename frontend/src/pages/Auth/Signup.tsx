@@ -3,6 +3,7 @@ import "./index.css";
 import { Link } from "react-router-dom";
 import useSignup from "src/api/useSignup";
 import useFetchProfile from "src/api/useFetchProfile";
+import { emailRegex } from "./Login";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -55,8 +56,15 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <p className="lastUpdated">Must be at least 6 characters</p>
         </div>
-        <button type="submit" className="submit-button">
+        <button
+          type="submit"
+          className="submit-button"
+          disabled={
+            !name.trim() || password.length < 6 || !emailRegex.test(email)
+          }
+        >
           Sign Up
         </button>
       </form>

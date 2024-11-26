@@ -24,12 +24,20 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Logo className="navbar_logo" />
-      <div className="navbar_avatar" onClick={() => setShowLogout(!showLogout)}>
+      <div
+        className="navbar_avatar"
+        onClick={() => setShowLogout(!showLogout)}
+        role="presentation"
+      >
         <div className="navbar_avatar_name">
           {user?.name.charAt(0).toUpperCase()}
         </div>
         {showLogout && (
-          <div onClick={handleLogout} className="logout_menu">
+          <div
+            onClick={handleLogout}
+            className="logout_menu"
+            role="presentation"
+          >
             Logout
           </div>
         )}

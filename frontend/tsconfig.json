@@ -19,5 +19,6 @@
     "noImplicitAny": false,
     "baseUrl": "."
   },
-  "include": ["src"]
+  "include": ["src"],
+  "files": ["globals.d.ts"]
 }

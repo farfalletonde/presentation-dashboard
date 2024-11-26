@@ -22,7 +22,8 @@ const useCreatePresentation = () => {
           const urlResult = await imageUploadUrlRequest(); // get image upload url
 
           if (urlResult) {
-            const uploadResult = await imageUploadRequest({ //upload image file to the fetched url
+            const uploadResult = await imageUploadRequest({
+              //upload image file to the fetched url
               imageUrl: urlResult,
               file: imageFile,
             });
@@ -42,7 +43,7 @@ const useCreatePresentation = () => {
         return undefined;
       }
     },
-    []
+    [imageUploadRequest, imageUploadUrlRequest]
   );
 };
 

@@ -21,7 +21,7 @@ const UpdatePresentation = ({ id, close }: IUpdatePresentationProps) => {
 
   return (
     <ModalBox width={420}>
-      <Cross className="crossSvg" cursor="pointer" onClick={close} />
+      <Cross className="crossSvg" cursor="pointer" onClick={() => close()} />
       <h2 className="modalTitle">Update Presentation</h2>
       <label htmlFor="name">Presentation Name</label>
       <input

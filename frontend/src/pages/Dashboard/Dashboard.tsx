@@ -42,6 +42,7 @@ const Dashboard = () => {
           <div
             className="createButton"
             onClick={() => setShowCreateModal(true)}
+            role="presentation"
           >
             <Plus className="plusSvg" />
             <p className="newPresentation">Create a new presentation</p>
@@ -49,6 +50,7 @@ const Dashboard = () => {
           <div
             className="createButton createWithAi"
             onClick={() => setShowCreateAIModal(true)}
+            role="presentation"
           >
             <Stars className="starsSvg" />
             <p className="createWithAitTitle">Create with AI</p>
@@ -63,6 +65,7 @@ const Dashboard = () => {
               <div
                 className="btnSortBy"
                 onClick={() => setShowSortByMenu(!showSortByMenu)}
+                role="presentation"
               >
                 <SortBy className="sortByIcon" />
                 <span className="sortByText">Sort by</span>
@@ -72,24 +75,28 @@ const Dashboard = () => {
                     <li
                       className="sortByItem"
                       onClick={() => setSelectedSort(SORT_BY.TITLE_A_Z)}
+                      role="presentation"
                     >
                       Title (A-Z)
                     </li>
                     <li
                       className="sortByItem"
                       onClick={() => setSelectedSort(SORT_BY.TITLE_Z_A)}
+                      role="presentation"
                     >
                       Title (Z-A)
                     </li>
                     <li
                       className="sortByItem"
                       onClick={() => setSelectedSort(SORT_BY.RECENTLY_MODIFIED)}
+                      role="presentation"
                     >
                       Recently Modified
                     </li>
                     <li
                       className="sortByItem"
                       onClick={() => setSelectedSort(SORT_BY.OLDEST_MODIFIED)}
+                      role="presentation"
                     >
                       Oldest Modified
                     </li>
@@ -105,6 +112,7 @@ const Dashboard = () => {
             <div className="createContainer">
               {presentations?.map((item) => (
                 <PresentationItem
+                  key={item.id}
                   presentation={item}
                   presentationUpdated={loadPresentations}
                 />

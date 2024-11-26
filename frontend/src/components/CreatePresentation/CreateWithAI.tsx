@@ -23,8 +23,10 @@ const CreateWithAI = ({ close }: ICreateModalProps) => {
 
   return (
     <ModalBox width={708}>
-      <Cross className="crossSvg" cursor="pointer" onClick={close} />
-      <label id="aiPromptLabel">What’s your presentation about? </label>
+      <Cross className="crossSvg" cursor="pointer" onClick={() => close()} />
+      <label id="aiPromptLabel" htmlFor="name">
+        What’s your presentation about?{" "}
+      </label>
       <input
         id="name"
         value={aiPrompt}

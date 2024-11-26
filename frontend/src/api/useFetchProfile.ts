@@ -14,26 +14,29 @@ const useFetchProfile = (): ((
 ) => Promise<IFetchProfileResponse | undefined>) => {
   const { setUser } = useContext(AuthContext);
 
-  return useCallback(async (token: string) => {
-    try {
-      apiRequest.setTokens(token);
-      AsyncStorage.setItem("auth", token);
+  return useCallback(
+    async (token: string) => {
+      try {
+        apiRequest.setTokens(token);
+        AsyncStorage.setItem("auth", token);
 
-      const result = await apiRequest.get<IFetchProfileResponse>(
-        "/auth/profile"
-      );
+        const result = await apiRequest.get<IFetchProfileResponse>(
+          "/auth/profile"
+        );
 
-      if (result) {
-        setUser(result);
+        if (result) {
+          setUser(result);
+        }
+
+        return result;
+      } catch (error) {
+        console.error("fetchProfile error", error);
+
+        return undefined;
       }
-
-      return result;
-    } catch (error) {
-      console.error("fetchProfile error", error);
-
-      return undefined;
-    }
-  }, []);
+    },
+    [setUser]
+  );
 };
 
 export default useFetchProfile;

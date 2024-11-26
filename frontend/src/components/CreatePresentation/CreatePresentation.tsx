@@ -16,8 +16,7 @@ const CreatePresentation = ({ close }: ICreateModalProps) => {
   const showImageBrowser = () => document.getElementById("imageInput")?.click();
 
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
-    if (e.target.files && e.target.files?.[0]) {
+    if (e.target.files?.[0]) {
       setFile(e.target.files[0]);
     }
   };
@@ -31,7 +30,7 @@ const CreatePresentation = ({ close }: ICreateModalProps) => {
 
   return (
     <ModalBox width={420}>
-      <Cross className="crossSvg" cursor="pointer" onClick={close} />
+      <Cross className="crossSvg" cursor="pointer" onClick={() => close()} />
       <h2 className="modalTitle">Create Presentation</h2>
       <label htmlFor="name">Presentation Name</label>
       <input
@@ -41,8 +40,14 @@ const CreatePresentation = ({ close }: ICreateModalProps) => {
         required
       />
 
-      <label id="thumbnailTitle">Presentation Thumbnail</label>
-      <div className="imageUploadContainer" onClick={showImageBrowser}>
+      <label id="thumbnailTitle" htmlFor="imageInput">
+        Presentation Thumbnail
+      </label>
+      <div
+        className="imageUploadContainer"
+        onClick={showImageBrowser}
+        role="presentation"
+      >
         <Thumbnail className="thumbnailSvg" />
         <p className="uploadImageDesc">
           Upload a picture for your presentation thumbnail. PNG or JPG (rec

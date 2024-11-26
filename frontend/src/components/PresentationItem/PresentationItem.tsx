@@ -53,6 +53,7 @@ const PresentationItem = ({
           presentation.image ??
           "https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg"
         }
+        alt="presentationImage"
       />
 
       <p className="presentationAuthor">by {presentation.created_by}</p>
@@ -63,6 +64,7 @@ const PresentationItem = ({
           onClick={() => {
             setShowEditOverlay(false);
           }}
+          role="presentation"
         >
           <ul className="editMenu">
             <li
@@ -71,11 +73,16 @@ const PresentationItem = ({
                 e.stopPropagation();
                 setShowEditModal(true);
               }}
+              role="presentation"
             >
               <Rename className="editIcon" />
               <span className="editText">Rename</span>
             </li>
-            <li className="editListItem" onClick={handleDeletePresentation}>
+            <li
+              className="editListItem"
+              onClick={handleDeletePresentation}
+              role="presentation"
+            >
               <Delete className="editIcon" />
               <span className="editText">Delete</span>
             </li>

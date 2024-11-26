@@ -37,8 +37,8 @@
 
 .navigate-link,
 .navigate-link:visited {
+  margin-left: 5px;
   color: var(--primary-purple);
-  text-decoration: none;
 }
 
 .navigate-link:hover {

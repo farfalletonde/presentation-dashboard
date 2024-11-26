@@ -55,10 +55,12 @@ const Login = () => {
         </button>
       </form>
       <div className="form-footer">
-        <p>Don't have an account?</p>
-        <Link to="/auth/signup" className="navigate-link">
-          Sign Up
-        </Link>
+        <p>
+          Don't have an account?
+          <Link to="/auth/signup" className="navigate-link">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );

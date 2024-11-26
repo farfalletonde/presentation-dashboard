@@ -7,6 +7,7 @@ import { IPresentation } from "src/api/useGetPresentations";
 import useDeletePresentation from "src/api/useDeletePresentation";
 import { Modal } from "@mui/material";
 import UpdatePresentation from "../CreatePresentation/UpdatePresentation";
+import moment from "moment";
 
 interface IPresentationItemProps {
   presentation: IPresentation;
@@ -44,7 +45,7 @@ const PresentationItem = ({
         />
       </div>
       <p className="lastUpdated">
-        Last update {timeAgo(presentation.last_updated)}
+        Last update: {timeAgo(presentation.last_updated)}
       </p>
 
       <img
@@ -106,33 +107,10 @@ const PresentationItem = ({
 };
 
 const timeAgo = (timestamp: string) => {
-  const now = new Date();
-  const time = new Date(timestamp);
+  const utcOffset = moment().utcOffset();
+  const adjustedTimestamp = moment(timestamp).add(utcOffset, "minutes");
 
-  const diffInMs = now.getTime() - time.getTime(); // Difference in milliseconds
-  const localOffset = now.getTimezoneOffset() * 60000;
-  const adjustedTimeInMs = diffInMs + localOffset; // Convert to local timezone
-
-  const diffInSec = Math.floor(adjustedTimeInMs / 1000); // Convert to seconds
-  const diffInMin = Math.floor(diffInSec / 60); // Convert to minutes
-  const diffInHours = Math.floor(diffInMin / 60); // Convert to hours
-  const diffInDays = Math.floor(diffInHours / 24); // Convert to days
-
-  if (diffInSec < 60) {
-    return `${diffInSec} second${diffInSec !== 1 ? "s" : ""} ago`;
-  } else if (diffInMin < 60) {
-    return `${diffInMin} minute${diffInMin !== 1 ? "s" : ""} ago`;
-  } else if (diffInHours < 24) {
-    return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
-  } else if (diffInDays < 30) {
-    return `${diffInDays} day${diffInDays !== 1 ? "s" : ""} ago`;
-  } else if (diffInDays < 365) {
-    const diffInMonths = Math.floor(diffInDays / 30);
-    return `${diffInMonths} month${diffInMonths !== 1 ? "s" : ""} ago`;
-  } else {
-    const diffInYears = Math.floor(diffInDays / 365);
-    return `${diffInYears} year${diffInYears !== 1 ? "s" : ""} ago`;
-  }
+  return moment(adjustedTimestamp).from(moment());
 };
 
 export default PresentationItem;

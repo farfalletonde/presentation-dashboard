@@ -11,7 +11,7 @@ interface IGetAIPromptRequest {
 }
 
 const useGetAiResult = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async ({ message }: IGetAIPromptResponse) => {
@@ -25,12 +25,13 @@ const useGetAiResult = () => {
         return result?.message;
       } catch (error) {
         console.error("getAiPrompt error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 

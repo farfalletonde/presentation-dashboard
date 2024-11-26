@@ -18,7 +18,7 @@ export enum SORT_BY {
 }
 
 const useGetPresentations = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async (sortBy: SORT_BY) => {
@@ -31,12 +31,13 @@ const useGetPresentations = () => {
         return result;
       } catch (error) {
         console.error("getPresentations error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 

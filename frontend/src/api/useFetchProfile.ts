@@ -14,7 +14,7 @@ const useFetchProfile = (): ((
   token: string
 ) => Promise<IFetchProfileResponse | undefined>) => {
   const { setUser } = useContext(AuthContext);
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async (token: string) => {
@@ -35,13 +35,13 @@ const useFetchProfile = (): ((
         return result;
       } catch (error) {
         console.error("fetchProfile error", error);
-
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setUser, setIsLoading]
+    [setUser, setIsLoading, setError]
   );
 };
 

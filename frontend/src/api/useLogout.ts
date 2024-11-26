@@ -7,7 +7,7 @@ export type LogoutResponse = {
 };
 
 const useLogout = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(async () => {
     try {
@@ -21,11 +21,12 @@ const useLogout = () => {
       return result;
     } catch (error) {
       console.error("logout error", error);
+      setError(error);
       return undefined;
     } finally {
       setIsLoading(false);
     }
-  }, [setIsLoading]);
+  }, [setIsLoading, setError]);
 };
 
 export default useLogout;

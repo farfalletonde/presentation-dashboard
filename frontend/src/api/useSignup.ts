@@ -13,7 +13,7 @@ type SignupRequest = {
 };
 
 const useSignup = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async (request: SignupRequest) => {
@@ -28,12 +28,13 @@ const useSignup = () => {
         return result;
       } catch (error) {
         console.error("signup error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 export default useSignup;

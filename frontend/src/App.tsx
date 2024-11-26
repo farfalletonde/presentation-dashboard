@@ -2,14 +2,22 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Auth/Signup.tsx";
 import Dashboard from "./pages/Dashboard/Dashboard.tsx";
 import Login from "./pages/Auth/Login.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext/AuthContext.tsx";
 import { AppContext } from "./context/AppContext/AppContext.tsx";
 import LoadingOverlay from "./components/LoadingOverlay/LoadingOverlay.tsx";
 
 const App = () => {
   const { user } = useContext(AuthContext);
-  const { isLoading } = useContext(AppContext);
+  const { isLoading, error } = useContext(AppContext);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        alert(error);
+      }, 80);
+    }
+  }, [error]);
 
   return (
     <>

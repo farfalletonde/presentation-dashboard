@@ -7,7 +7,7 @@ interface IImageUrlResponse {
 }
 
 const useGetImageUploadUrl = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(async () => {
     try {
@@ -16,11 +16,12 @@ const useGetImageUploadUrl = () => {
       return result?.imageUrl;
     } catch (error) {
       console.error("getImageUploadUrl error", error);
+      setError(error);
       return undefined;
     } finally {
       setIsLoading(false);
     }
-  }, [setIsLoading]);
+  }, [setIsLoading, setError]);
 };
 
 export default useGetImageUploadUrl;

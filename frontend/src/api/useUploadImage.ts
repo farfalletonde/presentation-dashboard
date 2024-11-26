@@ -7,7 +7,7 @@ interface IUploadImageRequest {
 }
 
 const useUploadImage = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async ({ imageUrl, file }: IUploadImageRequest) => {
@@ -25,12 +25,13 @@ const useUploadImage = () => {
         return imageUrl.split("?")[0];
       } catch (error) {
         console.error("uploadImage error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 

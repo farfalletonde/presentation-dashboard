@@ -9,7 +9,7 @@ interface IUpdatePresentationRequest {
 }
 
 const useUpdatePresentation = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async (request: IUpdatePresentationRequest) => {
@@ -24,12 +24,13 @@ const useUpdatePresentation = () => {
         return result;
       } catch (error) {
         console.error("updatePresentation error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 

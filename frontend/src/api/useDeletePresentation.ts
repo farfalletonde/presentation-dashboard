@@ -8,7 +8,7 @@ interface IDeletePresentationRequest {
 }
 
 const useDeletePresentation = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async (request: IDeletePresentationRequest) => {
@@ -23,12 +23,13 @@ const useDeletePresentation = () => {
         return result;
       } catch (error) {
         console.error("deletePresentation error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 

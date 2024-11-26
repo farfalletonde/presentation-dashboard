@@ -12,7 +12,7 @@ type LoginRequest = {
 };
 
 const useLogin = () => {
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async (request: LoginRequest) => {
@@ -27,12 +27,13 @@ const useLogin = () => {
         return result;
       } catch (error) {
         console.error("login error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [setIsLoading]
+    [setIsLoading, setError]
   );
 };
 

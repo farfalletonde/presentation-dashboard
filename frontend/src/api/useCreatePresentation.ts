@@ -13,7 +13,7 @@ interface ICreatePresentationRequest {
 const useCreatePresentation = () => {
   const imageUploadUrlRequest = useGetImageUploadUrl();
   const imageUploadRequest = useUploadImage();
-  const { setIsLoading } = useContext(AppContext);
+  const { setIsLoading, setError } = useContext(AppContext);
 
   return useCallback(
     async ({ name }: ICreatePresentationRequest, imageFile?: File) => {
@@ -44,12 +44,13 @@ const useCreatePresentation = () => {
         return result;
       } catch (error) {
         console.error("createPresentation error", error);
+        setError(error);
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [imageUploadRequest, imageUploadUrlRequest, setIsLoading]
+    [imageUploadRequest, imageUploadUrlRequest, setIsLoading, setError]
   );
 };
 

@@ -97,7 +97,10 @@ const Dashboard = () => {
                 )}
               </div>
             </div>
-            <p className="dashboardLabel">8 files</p>
+            <p className="dashboardLabel">
+              {presentations?.length}{" "}
+              {presentations?.length === 1 ? "file" : "files"}
+            </p>
 
             <div className="createContainer">
               {presentations?.map((item) => (

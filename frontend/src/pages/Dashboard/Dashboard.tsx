@@ -55,7 +55,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {(presentations?.length ?? 0) > -1 && (
+        {(presentations?.length ?? 0) > 0 && (
           <div>
             <div className="dashboardTitleContainer">
               <h2 className="dashboardTitle">Decks</h2>

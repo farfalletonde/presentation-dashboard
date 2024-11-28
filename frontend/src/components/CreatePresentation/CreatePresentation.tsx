@@ -33,46 +33,43 @@ const CreatePresentation = ({ close }: ICreateModalProps) => {
       <Cross className="crossSvg" cursor="pointer" onClick={() => close()} />
       <h2 className="modalTitle">Create Presentation</h2>
       <label htmlFor="name">Presentation Name</label>
+      <input
+        id="name"
+        value={presentationName}
+        onChange={(e) => setPresentationName(e.target.value)}
+        required
+      />
 
-      <form onSubmit={handlCreatePresentation} className="inputForm">
+      <label id="thumbnailTitle" htmlFor="imageInput">
+        Presentation Thumbnail
+      </label>
+      <div
+        className="imageUploadContainer"
+        onClick={showImageBrowser}
+        role="presentation"
+      >
+        <Thumbnail className="thumbnailSvg" />
+        <p className="uploadImageDesc">
+          {file
+            ? file.name
+            : "Upload a picture for your presentation thumbnail. PNG or JPG (rec16:9)"}
+        </p>
+        <p className="browseImage">Browse</p>
         <input
-          id="name"
-          value={presentationName}
-          onChange={(e) => setPresentationName(e.target.value)}
-          required
+          id="imageInput"
+          type="file"
+          accept="image/*"
+          onChange={handleFileSelected}
         />
+      </div>
 
-        <label id="thumbnailTitle" htmlFor="imageInput">
-          Presentation Thumbnail
-        </label>
-        <div
-          className="imageUploadContainer"
-          onClick={showImageBrowser}
-          role="presentation"
-        >
-          <Thumbnail className="thumbnailSvg" />
-          <p className="uploadImageDesc">
-            {file
-              ? file.name
-              : "Upload a picture for your presentation thumbnail. PNG or JPG (rec16:9)"}
-          </p>
-          <p className="browseImage">Browse</p>
-          <input
-            id="imageInput"
-            type="file"
-            accept="image/*"
-            onChange={handleFileSelected}
-          />
-        </div>
-
-        <button
-          id="createButton"
-          disabled={(presentationName?.trim().length ?? 0) === 0}
-          type="submit"
-        >
-          Create
-        </button>
-      </form>
+      <button
+        id="createButton"
+        disabled={(presentationName?.trim().length ?? 0) === 0}
+        onClick={handlCreatePresentation}
+      >
+        Create
+      </button>
     </ModalBox>
   );
 };

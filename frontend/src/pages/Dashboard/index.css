@@ -28,6 +28,7 @@
   text-decoration: underline;
   margin-left: 6px;
   user-select: none;
+  white-space: nowrap;
 }
 
 .sortByMenu {

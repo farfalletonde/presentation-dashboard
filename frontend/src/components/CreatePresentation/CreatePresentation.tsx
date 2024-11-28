@@ -50,8 +50,9 @@ const CreatePresentation = ({ close }: ICreateModalProps) => {
       >
         <Thumbnail className="thumbnailSvg" />
         <p className="uploadImageDesc">
-          Upload a picture for your presentation thumbnail. PNG or JPG (rec
-          16:9)
+          {file
+            ? file.name
+            : "Upload a picture for your presentation thumbnail. PNG or JPG (rec16:9)"}
         </p>
         <p className="browseImage">Browse</p>
         <input

@@ -27,6 +27,7 @@
 .sortByText {
   text-decoration: underline;
   margin-left: 6px;
+  user-select: none;
 }
 
 .sortByMenu {
@@ -48,6 +49,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  user-select: none;
 }
 
 .sortByItem:hover {

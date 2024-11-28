@@ -94,6 +94,7 @@ const PresentationItem = ({
       <Modal open={showEditModal} onClose={() => setShowEditModal(false)}>
         <UpdatePresentation
           id={presentation.id}
+          name={presentation.name}
           close={(isCreated) => {
             if (isCreated) {
               handleEditPresentation();

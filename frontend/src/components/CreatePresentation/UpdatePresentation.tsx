@@ -6,11 +6,12 @@ import useUpdatePresentation from "src/api/useUpdatePresentation";
 
 interface IUpdatePresentationProps {
   id: number;
+  name: string;
   close: (isCreated?: boolean) => void;
 }
 
-const UpdatePresentation = ({ id, close }: IUpdatePresentationProps) => {
-  const [presentationName, setPresentationName] = useState<string>("");
+const UpdatePresentation = ({ id, name, close }: IUpdatePresentationProps) => {
+  const [presentationName, setPresentationName] = useState<string>(name);
 
   const updatePresentation = useUpdatePresentation();
 

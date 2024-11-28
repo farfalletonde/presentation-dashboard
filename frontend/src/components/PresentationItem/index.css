@@ -26,6 +26,8 @@
 }
 
 .threeDots {
+  padding: 6px 0px 6px 6px;
+  box-sizing: content-box;
   width: auto;
   cursor: pointer;
 }

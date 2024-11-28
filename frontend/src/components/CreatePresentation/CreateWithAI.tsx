@@ -24,23 +24,25 @@ const CreateWithAI = ({ close }: ICreateModalProps) => {
   return (
     <ModalBox width={708}>
       <Cross className="crossSvg" cursor="pointer" onClick={() => close()} />
-      <label id="aiPromptLabel" htmlFor="name">
-        What’s your presentation about?{" "}
-      </label>
-      <input
-        id="name"
-        value={aiPrompt}
-        onChange={(e) => setAiPrompt(e.target.value)}
-        required
-      />
+      <form onSubmit={handleCreateWithAi} className="inputForm">
+        <label id="aiPromptLabel" htmlFor="name">
+          What’s your presentation about?{" "}
+        </label>
+        <input
+          id="name"
+          value={aiPrompt}
+          onChange={(e) => setAiPrompt(e.target.value)}
+          required
+        />
 
-      <button
-        id="letsStartButton"
-        disabled={(aiPrompt?.trim().length ?? 0) === 0}
-        onClick={handleCreateWithAi}
-      >
-        Let's Start
-      </button>
+        <button
+          id="letsStartButton"
+          disabled={(aiPrompt?.trim().length ?? 0) === 0}
+          type="submit"
+        >
+          Let's Start
+        </button>
+      </form>
     </ModalBox>
   );
 };

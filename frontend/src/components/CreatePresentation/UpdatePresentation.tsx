@@ -24,21 +24,23 @@ const UpdatePresentation = ({ id, name, close }: IUpdatePresentationProps) => {
     <ModalBox width={420}>
       <Cross className="crossSvg" cursor="pointer" onClick={() => close()} />
       <h2 className="modalTitle">Update Presentation</h2>
-      <label htmlFor="name">Presentation Name</label>
-      <input
-        id="name"
-        value={presentationName}
-        onChange={(e) => setPresentationName(e.target.value)}
-        required
-      />
+      <form onSubmit={handlUpdatePresentation} className="inputForm">
+        <label htmlFor="name">Presentation Name</label>
+        <input
+          id="name"
+          value={presentationName}
+          onChange={(e) => setPresentationName(e.target.value)}
+          required
+        />
 
-      <button
-        id="createButton"
-        disabled={(presentationName?.trim().length ?? 0) === 0}
-        onClick={handlUpdatePresentation}
-      >
-        Update
-      </button>
+        <button
+          id="createButton"
+          disabled={(presentationName?.trim().length ?? 0) === 0}
+          type="submit"
+        >
+          Update
+        </button>
+      </form>
     </ModalBox>
   );
 };
